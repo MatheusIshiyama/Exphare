@@ -5,4 +5,4 @@ try {
     config = null;
 }
 
-exports.DISCORD = config ? config.timers.short.discord : process.env.D_SHORT;
+exports.DISCORD = config ? config.discord.short : process.env.D_SHORT;
