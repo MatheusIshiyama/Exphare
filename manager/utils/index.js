@@ -6,7 +6,7 @@ try {
     config = null;
 }
 
-exports.DISCORD = config ? config.manager.discord : process.env.D_MANAGER;
-exports.GENERAL = config ? config.manager.general : process.env.GENERAL;
-exports.SHORT = config ? config.manager.shortTimer : process.env.SHORT;
-exports.LONG = config ? config.manager.longTimer : process.env.LONG;
+exports.DISCORD = config ? config.discord.manager : process.env.D_MANAGER;
+exports.GENERAL = config ? config.channels.general : process.env.GENERAL;
+exports.LONG = config ? config.channels.long : process.env.LONG;
+exports.SHORT = config ? config.channels.short : process.env.SHORT;
