@@ -6,3 +6,4 @@ try {
 }
 
 exports.DISCORD = config ? config.discord.short : process.env.D_SHORT;
+exports.CHANNEL = config ? config.channels.short : process.env.SHORT;
