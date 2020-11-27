@@ -16,9 +16,7 @@ const msgEmbed = new Discord.MessageEmbed()
     .setTimestamp(new Date());
 
 bot.on("ready", async () => {
-    console.log(
-        "[Bot 25/5] Ativo"
-    );
+    console.log("[Bot 25/5] Ativo");
     connection = await bot.channels.cache.get(CHANNEL).join();
     msg = await bot.channels.cache.get(STATUS).send(msgEmbed);
     msgEmbed.setFooter("Exphare", bot.user.avatarURL());
