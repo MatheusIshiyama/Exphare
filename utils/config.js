@@ -33,5 +33,9 @@ exports.config = {
             text: config ? config.channels.shortText : process.env.SHORT_TEXT,
             voice: config ? config.channels.shortVoice : process.env.SHORT_VOICE
         }
+    },
+    notify: {
+        study: config ? config.notify.study : process.env.NOTIFY_STUDY,
+        pause: config ? config.notify.pause : process.env.NOTIFY_PAUSE
     }
 }
