@@ -23,6 +23,9 @@ exports.config = {
     kraken: {
         token: config ? config.bots.kraken : process.env.KRAKEN_TOKEN
     },
+    grifo: {
+        token: config ? config.bots.grifo : process.env.GRIFO_TOKEN
+    },
     channels: {
         general: config ? config.channels.generalText : process.env.GENERAL_TEXT,
         longTimer: {
