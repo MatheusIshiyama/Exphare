@@ -1,5 +1,7 @@
 const { manager } = require('./manager');
+const { short } = require('./timers/short');
 
 exports.bots = {
-    manager: manager
+    manager: manager,
+    short: short
 }
