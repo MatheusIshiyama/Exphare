@@ -39,7 +39,7 @@ bot.on("message", async (message) => {
     
     const commandcmd = bot.commands.get(command);
     if (commandcmd) {
-        commandcmd.run(bot, message, args);
+        commandcmd.run(message, args);
     }
 });
 
