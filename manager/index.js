@@ -3,9 +3,7 @@ const { DISCORD, GENERAL, SHORT, LONG } = require('./utils');
 const bot = new Discord.Client();
 
 bot.once("ready", () => {
-    console.log(
-        `[Bot] Bot foi iniciado, com ${bot.users.cache.size} usuários, em ${bot.channels.cache.size} canais, em ${bot.guilds.cache.size} servidores.`
-    );
+    console.log("[Bot Manager] Ativo");
 })
 
 bot.on("voiceStateUpdate", async voice => {
