@@ -5,3 +5,4 @@ bots.manager.login(config.manager.token);
 bots.short.login(config.shortTimer.token);
 bots.long.login(config.longTimer.token);
 bots.kraken.login(config.kraken.token);
+bots.grifo.login(config.grifo.token);
