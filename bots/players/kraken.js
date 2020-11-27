@@ -1,24 +1,25 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
-const prefix = "kraken";
+const prefix = "kr";
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
+fs.readdir("./bots/players/commands/", (err, files) => {
     if (err) {
         console.log(err);
     }
     let commandjs = files.filter( f => f.split(".").pop() == "js");
     commandjs.forEach( f => {
         let props = require(`./commands/${f}`);
-        console.log(`[Bot kraken] Comando ${f} carregado com sucesso.`);
         bot.commands.set(props.info.name, props);
-    });
+    })
+    console.log("[Bot kraken] Comandos carregados.");
 });
 
 bot.on("ready", () => {
     console.log("[Bot kraken] Ativo");
+    bot.user.setPresence({ activity: { name: "música [kr <comando>]", type: 2}})
 });
 
 bot.on("message", async (message) => {
