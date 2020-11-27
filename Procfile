@@ -1,3 +1,3 @@
 worker: npm start
-worker: node timers/long
-worker: node timers/short
+workerlong: node timers/long
+workershort: node timers/short
