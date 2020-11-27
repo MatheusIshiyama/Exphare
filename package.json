@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node manager\" \"node timers/short\" \"node timers/long\"",
+    "start": "concurrently \"node manager\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
