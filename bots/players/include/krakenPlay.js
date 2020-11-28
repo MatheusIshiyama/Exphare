@@ -1,4 +1,5 @@
 const ytdl = require("ytdl-core");
+const msg = require('../../include/message');
 
 module.exports = {
     async play(song, message) {
@@ -7,7 +8,10 @@ module.exports = {
         if (!song) {
             queue.channel.leave();
             message.client.queue.delete();
-            return queue.textChannel.send("🚫 A fila de musicas acabou.");
+            msg
+                .setTitle("Exphare - Kraken")
+                .setDescription("🚫 A fila de musicas acabou.");
+            return queue.textChannel.send(msg);
         }
 
         try {
