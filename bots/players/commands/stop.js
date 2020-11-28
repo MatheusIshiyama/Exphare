@@ -1,8 +1,13 @@
+const msg = require('../../include/message');
+
 exports.run = async message => {
     const queue = message.client.queue.get(message.guild.id);
 
     if(!queue) {
-        message.reply("Precisa ter músicas na fila de reprodução para parar.");
+        msg
+            .setTitle("Stop")
+            .setDescription("Não há músicas na fila de reprodução.");
+        message.channel.send(msg);
     } else {
         queue.songs = [];
         queue.connection.dispatcher.end();
