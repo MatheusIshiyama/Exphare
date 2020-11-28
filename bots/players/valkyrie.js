@@ -46,4 +46,4 @@ bot.on("message", async (message) => {
     }
 });
 
-exports.grifo = bot;
+exports.valkyrie = bot;
