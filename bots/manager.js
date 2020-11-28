@@ -2,8 +2,21 @@ const Discord = require('discord.js');
 const { config } = require('../utils/config');
 const bot = new Discord.Client();
 
+const longChannel = config.channels.longTimer.text;
+const shortChannel = config.channels.shortTimer.text;
+
 bot.once("ready", () => {
     console.log("[Bot Manager] Ativo");
+    bot.channels.cache.get(longChannel).messages
+        .fetch()
+        .then(msg =>
+            msg.forEach(msg => msg.delete())
+        );
+    bot.channels.cache.get(shortChannel).messages
+        .fetch()
+        .then(msg =>
+            msg.forEach(msg => msg.delete())
+        );
 })
 
 bot.on("voiceStateUpdate", async voice => {
