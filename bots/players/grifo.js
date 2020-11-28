@@ -4,6 +4,15 @@ const fs = require('fs');
 const prefix = "gr";
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+let queue = {
+    textChannel: null,
+    channel: null,
+    connection: null,
+    songs: [],
+    loop: false,
+    volume: 100,
+    playing: true
+};
 
 fs.readdir("./bots/players/commands/", (err, files) => {
     if (err) {
@@ -31,7 +40,6 @@ bot.on("message", async (message) => {
     const arg = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
     let args = arg.shift();
-
     
     while (arg.length > 0) {
         args = args + " " + arg[0];
@@ -40,7 +48,11 @@ bot.on("message", async (message) => {
     
     const commandcmd = bot.commands.get(command);
     if (commandcmd) {
-        commandcmd.run(message, args);
+        if(command === "play") {
+            commandcmd.run(message, args, queue, "grifo");
+        } else {
+            commandcmd.run(message, args);
+        }
     }
 });
 
