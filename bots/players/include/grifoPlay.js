@@ -1,15 +1,14 @@
 const ytdl = require("ytdl-core");
 
 module.exports = {
-    async play(song, message, queue) {
+    async play(song, message) {
+        const queue = message.client.queue.get(message.guild.id);
 
         if (!song) {
             queue.channel.leave();
-            message.client.queue.songs = [];
+            message.client.queue.delete();
             return queue.textChannel.send("🚫 A fila de musicas acabou.");
         }
-
-        queue.connection.on("disconnect", () => (message.client.queue.songs = []));
 
         try {
             stream = await ytdl(song.url, { filter: 'audioonly' });
@@ -20,21 +19,20 @@ module.exports = {
             }
         }
 
+        queue.connection.on("disconnect", () => message.client.queue.delete());
+
         const connection = queue.connection
             .play(stream)
             .on("finish", () => {
                 if (queue.loop) {
                     let lastSong = queue.songs.shift();
                     queue.songs.push(lastSong);
-                    module.exports.play(queue.songs[0], message, queue);
+                    module.exports.play(queue.songs[0], message);
                 } else {
                     queue.songs.shift();
-                    module.exports.play(queue.songs[0], message, queue);
+                    module.exports.play(queue.songs[0], message);
                 }
             })
-            .on("error", (err) => {
-                return console.error(err);
-            });
         connection.setVolumeLogarithmic(queue.volume / 100);
     },
 };
