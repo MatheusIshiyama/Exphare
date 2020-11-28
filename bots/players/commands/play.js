@@ -1,11 +1,20 @@
 const ytdl = require('ytdl-core');
 
-exports.run = async (message, args, queue, bot) => {
+exports.run = async (message, args, bot) => {
     const { channel } = message.member.voice;
     const { play } = require(`../include/${bot}Play`);
 
-    queue.textChannel = message.channel,
-    queue.channel = channel;
+    const queue = message.client.queue.get(message.guild.id);
+
+    const queueConstruct = {
+        textChannel: message.channel,
+        channel,
+        connection: null,
+        songs: [],
+        loop: false,
+        volume: 100,
+        playing: true,
+    };
 
     let urlValid = await ytdl.validateURL(args);
     let songInfo,
@@ -24,22 +33,22 @@ exports.run = async (message, args, queue, bot) => {
         }
     };
 
-    if(queue.songs.length > 0) {
+    if(!queue) {
+        message.reply(`Tocando: \`${song.title}\``);
+    } else {
         queue.songs.push(song);
-        return message.reply("Musica adicionada na queue");
+        return message.reply(`\`${song.title}\` adicionada na queue`);
     }
-    
-    queue.songs.push(song);
-    message.reply(`Tocando: ${song.title}`);
+
+    queueConstruct.songs.push(song);
+    message.client.queue.set(message.guild.id, queueConstruct);
     
     try {
-        queue.connection = await channel.join();
-        await queue.connection.voice.setSelfDeaf(true);
-        play(queue.songs[0], message, queue);
+        queueConstruct.connection = await channel.join();
+        await queueConstruct.connection.voice.setSelfDeaf(true);
+        play(queueConstruct.songs[0], message);
     } catch (error) {
-        message.client.queue.textChannel = null;
-        message.client.queue.channel = null;
-        message.client.queue.songs = [];
+        message.client.queue.delete(message.guild.id);
         await channel.leave();
         return message.channel.send("Erro: " + error);
     }
