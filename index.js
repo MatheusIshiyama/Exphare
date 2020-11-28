@@ -6,4 +6,5 @@ bots.manager.login(config.manager.token).then(() => {
     bots.long.login(config.longTimer.token);
     bots.kraken.login(config.kraken.token);
     bots.grifo.login(config.grifo.token);
+    bots.valkyrie.login(config.valkyrie.token);
 });
