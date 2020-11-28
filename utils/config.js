@@ -26,6 +26,9 @@ exports.config = {
     grifo: {
         token: config ? config.bots.grifo : process.env.GRIFO_TOKEN
     },
+    valkyrie: {
+        token: config ? config.bots.valkyrie : process.env.VALKYRIE_TOKEN
+    },
     channels: {
         general: config ? config.channels.generalText : process.env.GENERAL_TEXT,
         longTimer: {
