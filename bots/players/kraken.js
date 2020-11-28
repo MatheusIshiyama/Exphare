@@ -4,31 +4,25 @@ const fs = require('fs');
 const prefix = "kr";
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
-let queue = {
-    textChannel: null,
-    channel: null,
-    connection: null,
-    songs: [],
-    loop: false,
-    volume: 100,
-    playing: true
-};
+bot.queue = new Map();
 
 fs.readdir("./bots/players/commands/", (err, files) => {
     if (err) {
         console.log(err);
     }
     let commandjs = files.filter( f => f.split(".").pop() == "js");
+    let commads = 0;
     commandjs.forEach( f => {
         let props = require(`./commands/${f}`);
         bot.commands.set(props.info.name, props);
+        commads++;
     })
-    console.log("[Bot kraken] Comandos carregados.");
+    console.log(`[Bot kraken] ${commads} Comandos carregados.`);
 });
 
 bot.on("ready", () => {
     console.log("[Bot kraken] Ativo");
-    bot.user.setPresence({ activity: { name: "música [kr <comando>]", type: 2}})
+    bot.user.setPresence({ activity: { name: "música | [kr <comando>]", type: 1, url: 'https://twitch.tv/bravanzin' }});
 });
 
 bot.on("message", async (message) => {
@@ -48,11 +42,7 @@ bot.on("message", async (message) => {
     
     const commandcmd = bot.commands.get(command);
     if (commandcmd) {
-        if(command === "play") {
-            commandcmd.run(message, args, queue, "kraken");
-        } else {
-            commandcmd.run(message, args);
-        }
+        commandcmd.run(message, args, "kraken");
     }
 });
 

@@ -4,31 +4,25 @@ const fs = require('fs');
 const prefix = "gr";
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
-let queue = {
-    textChannel: null,
-    channel: null,
-    connection: null,
-    songs: [],
-    loop: false,
-    volume: 100,
-    playing: true
-};
+bot.queue = new Map();
 
 fs.readdir("./bots/players/commands/", (err, files) => {
     if (err) {
         console.log(err);
     }
     let commandjs = files.filter( f => f.split(".").pop() == "js");
+    let commands = 0;
     commandjs.forEach( f => {
         let props = require(`./commands/${f}`);
         bot.commands.set(props.info.name, props);
+        commands++;
     })
-    console.log("[Bot grifo] Comandos carregados.");
+    console.log(`[Bot grifo] ${commands} Comandos carregados.`);
 });
 
 bot.on("ready", () => {
     console.log("[Bot grifo] Ativo");
-    bot.user.setPresence({ activity: { name: "música [gr <comando>]", type: 2}})
+    bot.user.setPresence({ activity: { name: "música | [gr <comando>]", type: 1, url: 'https://twitch.tv/bravanzin' }});
 });
 
 bot.on("message", async (message) => {
@@ -48,11 +42,7 @@ bot.on("message", async (message) => {
     
     const commandcmd = bot.commands.get(command);
     if (commandcmd) {
-        if(command === "play") {
-            commandcmd.run(message, args, queue, "grifo");
-        } else {
-            commandcmd.run(message, args);
-        }
+        commandcmd.run(message, args, "grifo");
     }
 });
 
