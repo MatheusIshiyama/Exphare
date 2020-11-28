@@ -1,10 +1,12 @@
 const ytdl = require('ytdl-core');
+const msg = require('../../include/message');
 
 exports.run = async (message, args, bot) => {
     const { channel } = message.member.voice;
     const { play } = require(`../include/${bot}Play`);
 
     const queue = message.client.queue.get(message.guild.id);
+    msg.setTitle("Play");
 
     const queueConstruct = {
         textChannel: message.channel,
@@ -34,10 +36,12 @@ exports.run = async (message, args, bot) => {
     };
 
     if(!queue) {
-        message.reply(`Tocando: \`${song.title}\``);
+        msg.setDescription(`Tocando: \`${song.title}\``);
+        message.channel.send(msg);
     } else {
         queue.songs.push(song);
-        return message.reply(`\`${song.title}\` adicionada na queue`);
+        msg.setDescription(`\`${song.title}\` adicionada na queue`);
+        return message.channel.send(msg);
     }
 
     queueConstruct.songs.push(song);
@@ -50,7 +54,8 @@ exports.run = async (message, args, bot) => {
     } catch (error) {
         message.client.queue.delete(message.guild.id);
         await channel.leave();
-        return message.channel.send("Erro: " + error);
+        msg.setDescription("Erro: " + error);
+        return message.channel.send(msg);
     }
 }
 
