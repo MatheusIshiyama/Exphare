@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { config } = require('../utils/config');
 const bot = new Discord.Client();
+const Canvas = require('canvas');
 
 const longChannel = config.channels.longTimer.text;
 const shortChannel = config.channels.shortTimer.text;
@@ -18,6 +19,56 @@ bot.once("ready", () => {
             msg.forEach(msg => msg.delete())
         );
 })
+
+bot.on("guildMemberAdd", async member => {
+    const channel = member.guild.channels.cache.find(channel => channel.name === 'bem-vindo');
+	if (!channel) return;
+    
+    const canvas = Canvas.createCanvas(1920, 1080);
+    const ctx = canvas.getContext('2d');
+
+    // * background
+    const background = await Canvas.loadImage('./assets/background.jpg');
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    // * sombra
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    ctx.fillRect(50, 50, 1820, 980);
+    ctx.stroke();
+
+    // * contorno da foto de perfil
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = 60;
+    ctx.arc(960, 350, 200, 0, Math.PI * 2, true);
+    ctx.stroke();
+    
+    // * boas vindas
+    ctx.font = '800 100px Sansita Swashed';
+    ctx.fillStyle = 'rgb(251, 214, 210)';
+    ctx.textAlign = 'center';
+    ctx.fillText("Bem vindo(a) ao Exphare", 960, 750);
+
+    // * user
+    ctx.font = '800 80px Sansita Swashed';
+    ctx.fillStyle = 'rgb(251, 214, 210)';
+    ctx.textAlign = 'center';
+    ctx.fillText(member.user.tag, 960, 900);
+
+    // * foto de perfil
+    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpeg' }));
+    ctx.beginPath();
+	ctx.arc(960, 350, 200, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip()
+    ctx.drawImage(avatar, 760, 150, 400, 400);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "welcome-image.png");
+
+    channel.send(`Bem vindo(a) ${member.user} ao Exphare!`);
+    channel.send(attachment);
+});
 
 bot.on("voiceStateUpdate", async voice => {
 
