@@ -54,7 +54,7 @@ bot.on("messageReactionRemove", async (reaction, user) => {
 });
 
 bot.on("guildMemberAdd", async member => {
-    const channel = member.guild.channels.cache.find(channel => channel.name === 'bem-vindo');
+    const channel = member.guild.channels.cache.find(channel => channel.name === 'boas-vindas');
 	if (!channel) return;
     
     const canvas = Canvas.createCanvas(1920, 1080);
