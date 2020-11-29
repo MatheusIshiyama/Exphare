@@ -7,6 +7,7 @@ try {
 
 exports.config = {
     server: config ? config.server : process.env.SERVER,
+    count: config ? config.channels.countVoice : process.env.COUNT_VOICE,
     manager: {
         token: config ? config.bots.manager : process.env.MANAGER_TOKEN
     },
@@ -30,7 +31,7 @@ exports.config = {
         token: config ? config.bots.valkyrie : process.env.VALKYRIE_TOKEN
     },
     channels: {
-        general: config ? config.channels.generalText : process.env.GENERAL_TEXT,
+        general: config ? config.channels.generalVoice : process.env.GENERAL_VOICE,
         longTimer: {
             text: config ? config.channels.longText : process.env.LONG_TEXT,
             voice: config ? config.channels.longVoice : process.env.LONG_VOICE
