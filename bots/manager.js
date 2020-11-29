@@ -27,6 +27,9 @@ bot.on("guildMemberAdd", async member => {
     const canvas = Canvas.createCanvas(1920, 1080);
     const ctx = canvas.getContext('2d');
 
+    // * add fonte
+    Canvas.registerFont("assets/SansitaSwashed.ttf", { family: 'Sansita Swashed' });
+
     // * background
     const background = await Canvas.loadImage('./assets/background.jpg');
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -44,17 +47,17 @@ bot.on("guildMemberAdd", async member => {
     ctx.arc(960, 350, 200, 0, Math.PI * 2, true);
     ctx.stroke();
     
-    // * boas vindas
-    ctx.font = '800 100px Sansita Swashed';
-    ctx.fillStyle = 'rgb(251, 214, 210)';
+    // * boas vindas e user
+    ctx.fillStyle = 'rgb(48, 55, 101)';
+    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.lineWidth = 20;
     ctx.textAlign = 'center';
+    ctx.font = '110px Sansita Swashed';
+    ctx.strokeText("Bem vindo(a) ao Exphare", 960, 750);
     ctx.fillText("Bem vindo(a) ao Exphare", 960, 750);
-
-    // * user
-    ctx.font = '800 80px Sansita Swashed';
-    ctx.fillStyle = 'rgb(251, 214, 210)';
-    ctx.textAlign = 'center';
-    ctx.fillText(member.user.tag, 960, 900);
+    ctx.font = '90px Sansita Swashed';
+    ctx.strokeText(message.author.tag, 960, 900);
+    ctx.fillText(message.author.tag, 960, 900);
 
     // * foto de perfil
     const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpeg' }));
@@ -66,8 +69,7 @@ bot.on("guildMemberAdd", async member => {
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "welcome-image.png");
 
-    channel.send(`Bem vindo(a) ${member.user} ao Exphare!`);
-    channel.send(attachment);
+    channel.send(`Bem vindo(a) ${member.user} ao Exphare!`, attachment);
 });
 
 bot.on("voiceStateUpdate", async voice => {
