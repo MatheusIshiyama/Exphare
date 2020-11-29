@@ -56,8 +56,8 @@ bot.on("guildMemberAdd", async member => {
     ctx.strokeText("Bem vindo(a) ao Exphare", 960, 750);
     ctx.fillText("Bem vindo(a) ao Exphare", 960, 750);
     ctx.font = '90px Sansita Swashed';
-    ctx.strokeText(message.author.tag, 960, 900);
-    ctx.fillText(message.author.tag, 960, 900);
+    ctx.strokeText(member.user.tag, 960, 900);
+    ctx.fillText(member.user.tag, 960, 900);
 
     // * foto de perfil
     const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpeg' }));
