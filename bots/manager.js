@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
-const { config } = require('../utils/config');
-const bot = new Discord.Client();
 const Canvas = require('canvas');
+const { config } = require('../utils/config');
+
+const bot = new Discord.Client();
 
 let presence = false;
 const longChannel = config.channels.longTimer.text;
@@ -24,7 +25,6 @@ bot.once("ready", () => {
 });
 
 bot.on("guildMemberAdd", async member => {
-    bot.channels.cache.get(config.count).setName(`${bot.guilds.cache.get(config.server).memberCount} usuários.`);
     const channel = member.guild.channels.cache.find(channel => channel.name === 'bem-vindo');
 	if (!channel) return;
     
@@ -74,10 +74,6 @@ bot.on("guildMemberAdd", async member => {
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "welcome-image.png");
 
     channel.send(`Bem vindo(a) ${member.user} ao Exphare!`, attachment);
-});
-
-bot.on("guildMemberRemove", () => {
-    bot.channels.cache.get(config.count).setName(`${bot.guilds.cache.get(config.server).memberCount} usuários.`);
 });
 
 bot.on("voiceStateUpdate", async voice => {
