@@ -7,7 +7,6 @@ try {
 
 exports.config = {
     server: config ? config.server : process.env.SERVER,
-    count: config ? config.channels.countVoice : process.env.COUNT_VOICE,
     manager: {
         token: config ? config.bots.manager : process.env.MANAGER_TOKEN
     },
