@@ -10,6 +10,7 @@ const shortChannel = config.channels.shortTimer.text;
 bot.once("ready", () => {
     console.log("[Bot Manager] Ativo");
     bot.user.setPresence({ activity: { name: "lo-fi | precisa de ajuda? digite !comandos", type: 2 }});
+    bot.channels.cache.get(config.count).setName(`${bot.guilds.cache.get(config.server).memberCount} usuários.`);
     bot.channels.cache.get(longChannel).messages
         .fetch()
         .then(msg =>
@@ -20,9 +21,10 @@ bot.once("ready", () => {
         .then(msg =>
             msg.forEach(msg => msg.delete())
         );
-})
+});
 
 bot.on("guildMemberAdd", async member => {
+    bot.channels.cache.get(config.count).setName(`${bot.guilds.cache.get(config.server).memberCount} usuários.`);
     const channel = member.guild.channels.cache.find(channel => channel.name === 'bem-vindo');
 	if (!channel) return;
     
@@ -72,6 +74,10 @@ bot.on("guildMemberAdd", async member => {
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "welcome-image.png");
 
     channel.send(`Bem vindo(a) ${member.user} ao Exphare!`, attachment);
+});
+
+bot.on("guildMemberRemove", () => {
+    bot.channels.cache.get(config.count).setName(`${bot.guilds.cache.get(config.server).memberCount} usuários.`);
 });
 
 bot.on("voiceStateUpdate", async voice => {
@@ -198,7 +204,7 @@ bot.on("message", async message => {
         setTimeout(() => msg.delete(), 30000);
         message.delete();
     }
-})
+});
 
 async function botPresence() {
     presence = !presence;
@@ -207,7 +213,7 @@ async function botPresence() {
     } else {
         bot.user.setPresence({ activity: { name: "lo-fi | precisa de ajuda? digite !comandos", type: 2 }});
     }
-}
+};
 
 setInterval(botPresence, 11000);
 
