@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { config } = require('./utils/config');
 const { bots } = require('./bots/index');
 
@@ -8,3 +9,7 @@ bots.manager.login(config.manager.token).then(() => {
     bots.grifo.login(config.grifo.token);
     bots.valkyrie.login(config.valkyrie.token);
 });
+
+mongoose
+    .connect(config.mongodb, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
+    .then(console.log("[MongoDB] conectado ao mongo"))
