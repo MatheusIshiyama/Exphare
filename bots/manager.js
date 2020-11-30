@@ -31,8 +31,8 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 			console.error('Something went wrong when fetching the message: ', error);
 			return;
 		}
-	}
-	if(reaction.message.content.startsWith("**confirmar")) {
+    }
+	if(reaction.message.channel.messages.cache.get(config.confirm)) {
         const role = reaction.message.guild.roles.cache.find(role => role.name === "membro");
         reaction.message.guild.members.cache.get(user.id).roles.add(role);
     }
@@ -47,7 +47,7 @@ bot.on("messageReactionRemove", async (reaction, user) => {
 			return;
 		}
 	}
-	if(reaction.message.content.startsWith("**confirmar")) {
+	if(reaction.message.channel.messages.cache.get(config.confirm)) {
         const role = reaction.message.guild.roles.cache.find(role => role.name === "membro");
         reaction.message.guild.members.cache.get(user.id).roles.remove(role);
     }
