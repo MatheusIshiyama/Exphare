@@ -7,6 +7,7 @@ try {
 
 exports.config = {
     server: config ? config.server : process.env.SERVER,
+    confirm: config ? config.confirm : process.env.CONFIRM,
     manager: {
         token: config ? config.bots.manager : process.env.MANAGER_TOKEN
     },
