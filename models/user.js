@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const User = new Schema({
     id: String,
     name: String,
-    voiceTime: Number,
+    lastConnection: Number,
     accumulatedTime: Number,
     toDo: Array,
 });
