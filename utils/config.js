@@ -23,12 +23,15 @@ exports.config = {
         role: config ? config.roles.short : process.env.SHORT_ROLE
     },
     kraken: {
+        id: config ? config.id.kraken : process.env.KRAKEN_ID,
         token: config ? config.bots.kraken : process.env.KRAKEN_TOKEN
     },
     grifo: {
+        id: config ? config.id.grifo : process.env.GRIFO_ID,
         token: config ? config.bots.grifo : process.env.GRIFO_TOKEN
     },
     valkyrie: {
+        id: config ? config.id.valkyrie : process.env.VALKYRIE_ID,
         token: config ? config.bots.valkyrie : process.env.VALKYRIE_TOKEN
     },
     channels: {
