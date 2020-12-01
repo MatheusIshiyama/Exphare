@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { config } = require('../utils/config');
 const { welcome } = require('./include/welcome');
 const { role } = require('./include/channel');
-const { userUpdate } = require('./include/user');
+const { userConnection, showTasks, newTask, removeTask } = require('./include/user');
 const { help } = require('./include/help');
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
@@ -62,10 +62,19 @@ bot.on("guildMemberAdd", async member => {
 
 bot.on("voiceStateUpdate", async (oldState, newState) => {
     role(oldState);
-    userUpdate(newState);
+    userConnection(newState);
 });
 
 bot.on("message", async message => {
+    if (message.author.bot) return;
+    const id = message.channel.id;
+    if(id === config.channels.toDo) {
+        showTasks(message);
+    } else if (id === config.channels.add) {
+            newTask(message);
+    } else if (id === config.channels.remove) {
+            removeTask(message);
+    };
     if (message.content === "!comandos") {
         help(message);
     }
