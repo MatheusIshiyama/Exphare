@@ -40,7 +40,11 @@ exports.config = {
         shortTimer: {
             text: config ? config.channels.shortText : process.env.SHORT_TEXT,
             voice: config ? config.channels.shortVoice : process.env.SHORT_VOICE
-        }
+        },
+        logs: config ? config.channels.logsText : process.env.LOGS_TEXT,
+        toDo: config ? config.channels.toDoText : process.env.TODO_TEXT,
+        add: config ? config.channels.addText : process.env.ADD_TEXT,
+        remove: config ? config.channels.removeText : process.env.REMOVE_TEXT,
     },
     notify: {
         study: config ? config.notify.study : process.env.NOTIFY_STUDY,
