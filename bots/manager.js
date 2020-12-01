@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { config } = require('../utils/config');
 const { welcome } = require('./include/welcome');
 const { role } = require('./include/channel');
-const { userUpdate } = require('./include/userUpdate');
+const { userUpdate } = require('./include/user');
 const { help } = require('./include/help');
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
