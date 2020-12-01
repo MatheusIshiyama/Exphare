@@ -17,9 +17,9 @@ module.exports = {
         }
         
         if(newState.channelID) {
-            await userModel.findOneAndUpdate({ id: newState.id }, { joined: Date.now() });
+            await userModel.findOneAndUpdate({ id: newState.id }, { voiceTime: Date.now() });
         } else {
-            time = Date.now() - req.joined;
+            time = Date.now() - req.voiceTime;
             await userModel.findOneAndUpdate({ id: newState.id }, { accumulatedTime: req.accumulatedTime + time });
         }
     }
