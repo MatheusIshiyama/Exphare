@@ -61,6 +61,11 @@ bot.on("guildMemberAdd", async member => {
 });
 
 bot.on("voiceStateUpdate", async (oldState, newState) => {
+    if (newState.id === config.longTimer.id) return;
+    if (newState.id === config.shortTimer.id) return;
+    if (newState.id === config.grifo.id) return;
+    if (newState.id === config.kraken.id) return;
+    if (newState.id === config.valkyrie.id) return;
     role(oldState);
     userConnection(newState);
 });
