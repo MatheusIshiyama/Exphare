@@ -3,7 +3,8 @@ const { short } = require('./timers/short');
 const { long } = require('./timers/long');
 const { kraken } = require('./players/kraken');
 const { grifo } = require('./players/grifo');
-const { valkyrie } = require("./players/valkyrie");
+const { valkyrie } = require('./players/valkyrie');
+const { silent } = require('./players/silent');
 
 exports.bots = {
     manager: manager,
@@ -11,5 +12,6 @@ exports.bots = {
     long: long,
     kraken: kraken,
     grifo: grifo,
-    valkyrie: valkyrie
+    valkyrie: valkyrie,
+    silent: silent,
 }
