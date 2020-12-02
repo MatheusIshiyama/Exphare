@@ -22,13 +22,69 @@ async function userVerify(user, username) {
 module.exports = {
     async userConnection(newState) {
         const user = await userVerify(newState, newState.member.displayName);
-        let time;
+        const roles = newState.guild.roles.cache;
+        const member = newState.guild.members.cache;
+        const id = config.rolesIds;
+        let time,
+            role,
+            lastRole,
+            acT;
+        let hours = 0;
+        let minutes = 0;
         
         if(newState.channelID) {
             await user.updateOne({ lastConnection: Date.now() });
         } else {
             time = Date.now() - user.lastConnection;
-            await user.updateOne({ accumulatedTime: req.accumulatedTime + time });
+            await user.updateOne({ accumulatedTime: user.accumulatedTime + time });
+        }
+
+        const newUser = await userModel.findOne({ id: newState.id });
+
+        acT = newUser.accumulatedTime;
+        acT = parseInt(acT/1000);
+        if (acT > 60) {
+            for(i = 0; i < acT; i += 60) {
+                minutes++;
+            };
+            if (minutes > 60) {
+                for(i = 0; i < minutes; i += 60) {
+                    hours++;
+                }
+            }
+        };
+
+        if (hours >= 270) {
+            role = roles.get(id.oraculo);
+            lastRole = roles.get(id.mestre);
+        } else if (hours >= 180 && hours < 270) {
+            role = roles.get(id.mestre);
+            lastRole = roles.get(id.senior);
+        } else if (hours >= 100 && hours < 180) {
+            role = roles.get(id.senior);
+            lastRole = roles.get(id.veterano);
+        } else if (hours >= 50 && hours < 100) {
+            role = roles.get(id.veterano);
+            lastRole = roles.get(id.experiente);
+        } else if (hours >= 25 && hours < 50) {
+            role = roles.get(id.experiente);
+            lastRole = roles.get(id.proficiente);
+        } else if (hours >= 12 && hours < 25) {
+            role = roles.get(id.proficiente);
+            lastRole = roles.get(id.novato);
+        } else if (hours >= 6 && hours < 12) {
+            role = roles.get(id.novato);
+            lastRole = roles.get(id.iniciante);
+        } else if (hours >= 1 && hours < 6) {
+            role = roles.get(id.iniciante);
+            lastRole = roles.get(id.treineiro);
+        } else {
+            role = roles.get(id.treineiro);
+        }
+
+        member.get(newState.id).roles.add(role);
+        if (hours >= 1) { 
+            member.get(newState.id).roles.remove(lastRole);
         }
     },
     async showTasks(message) {
