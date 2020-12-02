@@ -13,6 +13,7 @@ exports.config = {
         token: config ? config.bots.manager : process.env.MANAGER_TOKEN
     },
     silent: {
+        id: config ? config.id.silent : process.env.SILENT_ID,
         token: config ? config.bots.silent : process.env.SILENT_TOKEN 
     },
     longTimer: {
@@ -51,6 +52,7 @@ exports.config = {
         toDo: config ? config.channels.toDoText : process.env.TODO_TEXT,
         add: config ? config.channels.addText : process.env.ADD_TEXT,
         remove: config ? config.channels.removeText : process.env.REMOVE_TEXT,
+        silent: config ? config.channels.silentVoice : process.env.SILENT_VOICE
     },
     rolesIds: {
         oraculo: config ? config.rolesId.oraculo : process.env.ROLE_ORACULO,
