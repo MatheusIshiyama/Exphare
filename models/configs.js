@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const Configs = new Schema({
     id: String,
+    mongodb: String,
     confirm: String,
     manager: {
         token: String
