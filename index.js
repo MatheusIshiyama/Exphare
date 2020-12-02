@@ -8,6 +8,7 @@ bots.manager.login(config.manager.token).then(() => {
     bots.kraken.login(config.kraken.token);
     bots.grifo.login(config.grifo.token);
     bots.valkyrie.login(config.valkyrie.token);
+    bots.silent.login(config.silent.token);
 });
 
 mongoose
