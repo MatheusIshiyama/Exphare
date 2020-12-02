@@ -49,6 +49,17 @@ exports.config = {
         add: config ? config.channels.addText : process.env.ADD_TEXT,
         remove: config ? config.channels.removeText : process.env.REMOVE_TEXT,
     },
+    rolesIds: {
+        oraculo: config ? config.rolesId.oraculo : process.env.ROLE_ORACULO,
+        mestre: config ? config.rolesId.mestre : process.env.ROLE_MESTRE,
+        senior: config ? config.rolesId.senior : process.env.ROLE_SENIOR,
+        veterano: config ? config.rolesId.veterano : process.env.ROLE_VETERANO,
+        experiente: config ? config.rolesId.experiente : process.env.ROLE_EXPERIENTE,
+        proficiente: config ? config.rolesId.proficiente : process.env.ROLE_PROFICIENTE,
+        novato: config ? config.rolesId.novato : process.env.ROLE_NOVATO,
+        iniciante: config ? config.rolesId.iniciante : process.env.ROLE_INICIANTE,
+        treineiro: config ? config.rolesId.treineiro : process.env.ROLE_TREINEIRO
+    },
     notify: {
         study: config ? config.notify.study : process.env.NOTIFY_STUDY,
         pause: config ? config.notify.pause : process.env.NOTIFY_PAUSE
