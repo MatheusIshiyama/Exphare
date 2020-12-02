@@ -27,7 +27,7 @@ module.exports = {
         if(newState.channelID) {
             await user.updateOne({ lastConnection: Date.now() });
         } else {
-            time = Date.now() - req.lastConnection;
+            time = Date.now() - user.lastConnection;
             await user.updateOne({ accumulatedTime: req.accumulatedTime + time });
         }
     },
