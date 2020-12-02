@@ -12,6 +12,9 @@ exports.config = {
     manager: {
         token: config ? config.bots.manager : process.env.MANAGER_TOKEN
     },
+    silent: {
+        token: config ? config.bots.silent : process.env.SILENT_TOKEN 
+    },
     longTimer: {
         id: config ? config.id.long : process.env.LONG_ID,
         token: config ? config.bots.long : process.env.LONG_TOKEN,
