@@ -6,6 +6,7 @@ const bot = new Discord.Client();
 
 bot.on("ready", async () => {
     console.log("[Bot silent] Ativo");
+    bot.user.setPresence({ activity: { name: "lofi", type: 1, url: 'https://twitch.tv/bravanzin' }});
 })
 
 bot.setTimeout(async () => {
