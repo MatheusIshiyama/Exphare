@@ -39,6 +39,7 @@ exports.config = {
         token: config ? config.bots.valkyrie : process.env.VALKYRIE_TOKEN
     },
     channels: {
+        info: config ? config.channels.infoText : process.env.INFO_TEXT,
         general: config ? config.channels.generalVoice : process.env.GENERAL_VOICE,
         longTimer: {
             text: config ? config.channels.longText : process.env.LONG_TEXT,
