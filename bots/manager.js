@@ -66,7 +66,9 @@ bot.on("guildMemberAdd", async member => {
 });
 
 bot.on("voiceStateUpdate", async (oldState, newState) => {
-    botsIds.forEach(botId => { if(newState.id === botId) return });
+    let isBot = false;
+    botsIds.forEach(botId => { if(newState.id === botId) isBot = true });
+    if(isBot) return;
     role(oldState);
     userConnection(newState);
 });
