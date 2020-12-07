@@ -1,6 +1,5 @@
 const userModel = require('../../models/user');
 const { MessageEmbed } = require('discord.js');
-const { config } = require('../../utils/config');
 
 async function userVerify(userId, username, discriminator) {
     const req = await userModel.findOne({ id: userId });
@@ -25,8 +24,18 @@ module.exports = {
     async userConnection(newState) {
         const user = await userVerify(newState.id, newState.member.displayName);
         const roles = newState.guild.roles.cache;
-        const member = newState.guild.members.cache;
-        const id = config.rolesIds;
+        const members = newState.guild.members.cache;
+        const roleId = {
+            oraculo: '783500604684894228',
+            mestre: '783500602470039634',
+            senior: '783500284865019914',
+            veterano: '783500283186511948',
+            experiente: '783500278783410186',
+            proficiente: '783500268946849792',
+            novato: '783500048285302784',
+            iniciante: '783500040114798602',
+            treineiro: '783499689860268042'
+        };
         let time,
             role,
             lastRole,
@@ -57,36 +66,36 @@ module.exports = {
         };
 
         if (hours >= 270) {
-            role = roles.get(id.oraculo);
-            lastRole = roles.get(id.mestre);
+            role = roles.get(roleId.oraculo);
+            lastRole = roles.get(roleId.mestre);
         } else if (hours >= 180 && hours < 270) {
-            role = roles.get(id.mestre);
-            lastRole = roles.get(id.senior);
+            role = roles.get(roleId.mestre);
+            lastRole = roles.get(roleId.senior);
         } else if (hours >= 100 && hours < 180) {
-            role = roles.get(id.senior);
-            lastRole = roles.get(id.veterano);
+            role = roles.get(roleId.senior);
+            lastRole = roles.get(roleId.veterano);
         } else if (hours >= 50 && hours < 100) {
-            role = roles.get(id.veterano);
-            lastRole = roles.get(id.experiente);
+            role = roles.get(roleId.veterano);
+            lastRole = roles.get(roleId.experiente);
         } else if (hours >= 25 && hours < 50) {
-            role = roles.get(id.experiente);
-            lastRole = roles.get(id.proficiente);
+            role = roles.get(roleId.experiente);
+            lastRole = roles.get(roleId.proficiente);
         } else if (hours >= 12 && hours < 25) {
-            role = roles.get(id.proficiente);
-            lastRole = roles.get(id.novato);
+            role = roles.get(roleId.proficiente);
+            lastRole = roles.get(roleId.novato);
         } else if (hours >= 6 && hours < 12) {
-            role = roles.get(id.novato);
-            lastRole = roles.get(id.iniciante);
+            role = roles.get(roleId.novato);
+            lastRole = roles.get(roleId.iniciante);
         } else if (hours >= 1 && hours < 6) {
-            role = roles.get(id.iniciante);
-            lastRole = roles.get(id.treineiro);
+            role = roles.get(roleId.iniciante);
+            lastRole = roles.get(roleId.treineiro);
         } else {
-            role = roles.get(id.treineiro);
+            role = roles.get(roleId.treineiro);
         }
 
-        member.get(newState.id).roles.add(role);
+        members.get(newState.id).roles.add(role);
         if (hours >= 1) { 
-            member.get(newState.id).roles.remove(lastRole);
+            members.get(newState.id).roles.remove(lastRole);
         }
     },
     async showTasks(message) {
@@ -110,7 +119,7 @@ module.exports = {
         channel.send(msg);
     },
     async newTask(message) {
-        const log = message.guild.channels.cache.get(config.channels.logs);
+        const log = message.guild.channels.cache.get('783433795025895454');
         const user = await userVerify(message.author.id, message.author.username, message.author.discriminator);
 
         if(user.toDo.length > 14) {
@@ -125,7 +134,7 @@ module.exports = {
         }
     },
     async removeTask(message) {
-        const log = message.guild.channels.cache.get(config.channels.logs);
+        const log = message.guild.channels.cache.get('783433795025895454');
         const user = await userVerify(message.author.id, message.author.username, message.author.discriminator);
 
         if (!user.toDo.length) {
