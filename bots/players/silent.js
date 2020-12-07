@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
-const { config } = require('../../utils/config');
 
 const bot = new Discord.Client();
 
@@ -10,7 +9,7 @@ bot.on("ready", async () => {
 })
 
 bot.setTimeout(async () => {
-    const channel = await bot.channels.cache.get(config.channels.silent).join();
+    const channel = await bot.channels.cache.get('780926305101021241').join();
     channel.play(ytdl("https://www.youtube.com/watch?v=5qap5aO4i9A"));
 }, 3000);
 
