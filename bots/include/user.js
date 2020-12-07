@@ -2,13 +2,15 @@ const userModel = require('../../models/user');
 const { MessageEmbed } = require('discord.js');
 const { config } = require('../../utils/config');
 
-async function userVerify(user, username) {
-    const req = await userModel.findOne({ id: user.id });
+async function userVerify(userId, username, discriminator) {
+    const req = await userModel.findOne({ id: userId });
 
     if(!req) {
         const newUser = new userModel({
-            id: user.id,
-            name: username,
+            id: userId,
+            username: username,
+            discriminator: discriminator,
+            password: null,
             lastConnection: Date.now(),
             accumulatedTime: 0,
             toDo: Array
@@ -16,12 +18,12 @@ async function userVerify(user, username) {
         await newUser.save();
     }
 
-    return user = await userModel.findOne({ id: user.id });
+    return user = await userModel.findOne({ id: userId });
 }
 
 module.exports = {
     async userConnection(newState) {
-        const user = await userVerify(newState, newState.member.displayName);
+        const user = await userVerify(newState.id, newState.member.displayName);
         const roles = newState.guild.roles.cache;
         const member = newState.guild.members.cache;
         const id = config.rolesIds;
@@ -89,7 +91,7 @@ module.exports = {
     },
     async showTasks(message) {
         const channel = message.channel;
-        const user = await userVerify(message.author, message.author.username);
+        const user = await userVerify(message.author.id, message.author.username, message.author.discriminator);
         message.delete();
 
         const msg = new MessageEmbed()
@@ -109,7 +111,7 @@ module.exports = {
     },
     async newTask(message) {
         const log = message.guild.channels.cache.get(config.channels.logs);
-        const user = await userVerify(message.author, message.author.username);
+        const user = await userVerify(message.author.id, message.author.username, message.author.discriminator);
 
         if(user.toDo.length > 14) {
             log.send(`${message.author} sua lista de afazeres está lotada, por gentileza termine um afazer antes de adicionar outro, o limite de afazeres por usuário é 15.`);
@@ -124,7 +126,7 @@ module.exports = {
     },
     async removeTask(message) {
         const log = message.guild.channels.cache.get(config.channels.logs);
-        const user = await userVerify(message.author, message.author.username);
+        const user = await userVerify(message.author.id, message.author.username, message.author.discriminator);
 
         if (!user.toDo.length) {
             log.send(`${message.author} Não tem afazeres.`);
