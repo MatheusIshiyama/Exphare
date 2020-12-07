@@ -1,5 +1,3 @@
-const { config } = require("../../utils/config");
-
 module.exports = {
     async role(voice) {
         let roleInfo,
@@ -39,15 +37,15 @@ module.exports = {
             role.name = voice.channel.name;
         }
 
-        if (role.id === config.channels.general) {
+        if (role.id === '780923515137163304') {
             roleInfo = voice.guild.roles.cache.find(
                 (roles) => roles.name === "geral"
             );
-        } else if (role.id === config.channels.shortTimer.voice) {
+        } else if (role.id === '780924250684522506') {
             roleInfo = voice.guild.roles.cache.find(
                 (roles) => roles.name === "25 por 5"
             );
-        } else if (role.id === config.channels.longTimer.voice) {
+        } else if (role.id === '780924591722725426') {
             roleInfo = voice.guild.roles.cache.find(
                 (roles) => roles.name === "50 por 10"
             );
