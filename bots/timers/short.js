@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
-const { config } = require('../../utils/config');
 
 const bot = new Discord.Client();
 
-const server = config.server;
-const id = config.shortTimer.id;
-const role = config.shortTimer.role;
-const channel = config.channels.shortTimer.text;
-const voice = config.channels.shortTimer.voice;
+const server = '780889699162128424';
+const id = '781517289685778455';
+const role = '<@&781208786475941949>';
+const channel = '782269834750197770';
+const voice = '780924250684522506';
 
 let state,
     status,
@@ -54,7 +53,7 @@ async function study() {
     mention = await bot.channels.cache.get(channel).send(role);
     mention.delete();
     msg.edit(msgEmbed);
-    connection.play(config.notify.study);
+    connection.play('https://raw.githubusercontent.com/MatheusIshiyama/Exphare/master/assets/study.mp3');
 }
 
 async function pause() {
@@ -64,7 +63,7 @@ async function pause() {
     mention = await bot.channels.cache.get(channel).send(role);
     mention.delete();
     msg.edit(msgEmbed);
-    connection.play(config.notify.pause);
+    connection.play('https://raw.githubusercontent.com/MatheusIshiyama/Exphare/master/assets/pause.mp3');
 }
 
 async function description() {
