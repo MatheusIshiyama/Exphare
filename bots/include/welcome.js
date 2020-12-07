@@ -1,5 +1,4 @@
 const { MessageAttachment } = require('discord.js');
-const { config } = require('../../utils/config');
 const Canvas = require('canvas');
 
 
@@ -53,6 +52,6 @@ module.exports = {
 
         const attachment = new MessageAttachment(canvas.toBuffer(), "welcome-image.png");
 
-        channel.send(`Bem vindo(a) ao Exphare! ${member.user}, confira o canal <#${config.channels.info}> para obter mais informações!`, attachment);
+        channel.send(`Bem vindo(a) ao Exphare! ${member.user}, confira o canal <#780920312157700096> para obter mais informações!`, attachment);
     }
 }
