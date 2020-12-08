@@ -7,6 +7,7 @@ const app = express();
 
 // * Routes
 const authRoute = require('./routes/auth');
+const registerRoute = require('./routes/register');
 
 app.use(
     session({
@@ -26,6 +27,7 @@ app.use(passport.session());
 
 // * Middlewares Routes
 app.use('/auth', authRoute);
+app.use('/register', registerRoute);
 
 app.listen(config.client.port, () => {
     console.log(`[Server] ativo na porta: ${config.client.port}`);
