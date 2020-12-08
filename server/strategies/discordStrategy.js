@@ -3,6 +3,17 @@ const userModel = require('../../models/user');
 const passport = require('passport');
 const { config } = require('../../utils/config');
 
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser( async (userId, done) => {
+    const user = await userModel.findOne({ id: userId });
+    if (user) {
+        done(null, user);
+    }
+});
+
 passport.use(new DiscordStrategy({
     clientID: config.client.id,
     clientSecret: config.client.secret,
