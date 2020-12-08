@@ -109,11 +109,11 @@ module.exports = {
             .setTimestamp(Date.now())
             .setFooter("Exphare - Aprenda mais!", message.client.user.avatarURL());
 
-        if (!user.toDo.length) {
+        if (!user.tasks.length) {
             msg.setDescription('O usuário não tem afazeres pendentes.');
         } else {
             let tasks = [];
-            user.toDo.map(task => tasks += ` \`*\` ${task}\n`);
+            user.tasks.map(task => tasks += ` \`*\` ${task}\n`);
             msg.setDescription(tasks);    
         }
         channel.send(msg);
@@ -122,13 +122,13 @@ module.exports = {
         const log = message.guild.channels.cache.get('783433795025895454');
         const user = await userVerify(message.author.id, message.author.username);
 
-        if(user.toDo.length > 14) {
+        if(user.tasks.length > 14) {
             log.send(`${message.author} sua lista de afazeres está lotada, por gentileza termine um afazer antes de adicionar outro, o limite de afazeres por usuário é 15.`);
         } else {
-            if (user.toDo.find(todo => todo === message.content)) {
+            if (user.tasks.find(task => task === message.content)) {
                 log.send(`${message.author}, afazer: \`${message.content}\` já está na lista de afazeres.`);
             } else {
-                await user.updateOne({ $push: { toDo: message.content } });
+                await user.updateOne({ $push: { tasks: message.content } });
                 log.send(`${message.author} adicionou \`${message.content}\` na lista de afazeres.`);
             }
         }
@@ -137,11 +137,11 @@ module.exports = {
         const log = message.guild.channels.cache.get('783433795025895454');
         const user = await userVerify(message.author.id, message.author.username);
 
-        if (!user.toDo.length) {
+        if (!user.tasks.length) {
             log.send(`${message.author} Não tem afazeres.`);
         } else {
-            if (user.toDo.find(todo => todo === message.content)) {
-                await user.updateOne({ $pull: { toDo: message.content } });
+            if (user.tasks.find(task => task === message.content)) {
+                await user.updateOne({ $pull: { tasks: message.content } });
                 log.send(`${message.author} concluiu/removeu \`${message.content}\` da lista de afazeres.`);
             } else {
                 log.send(`${message.author}, afazer: \`${message.content}\` não está na lista de afazeres.`);
