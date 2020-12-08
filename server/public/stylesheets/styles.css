@@ -24,7 +24,7 @@ body, html {
 
 
 .background {
-    background-image: url("../assets/wallpaper.jpg");
+    background-image: url("../assets/background.jpg");
     height: 120%;
     background-position: 50% -5vh;
     background-size: cover;
