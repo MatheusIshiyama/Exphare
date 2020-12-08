@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.content {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.card {
+    width: 21rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 15%);
+}
+
+
+.background {
+    background-image: url("../assets/wallpaper.jpg");
+    height: 120%;
+    background-position: 50% -5vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
