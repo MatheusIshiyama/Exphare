@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 const { config } = require('../utils/config');
 require('./strategies/discordStrategy');
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 const authRoute = require('./routes/auth');
 const registerRoute = require('./routes/register');
 
+// * Session
 app.use(
     session({
         secret: config.client.secret,
@@ -20,6 +22,11 @@ app.use(
         name: 'discord.oauth2'
     })
 );
+
+// * Views
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // * Passport
 app.use(passport.initialize());
