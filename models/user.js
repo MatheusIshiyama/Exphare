@@ -7,7 +7,7 @@ const User = new Schema({
     password: String,
     lastConnection: Number,
     accumulatedTime: Number,
-    toDo: Array,
+    tasks: Array,
 });
 
 module.exports = model("User", User);
