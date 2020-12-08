@@ -36,6 +36,11 @@ app.use(passport.session());
 app.use('/auth', authRoute);
 app.use('/register', registerRoute);
 
+// * Set views
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
 app.listen(config.client.port, () => {
     console.log(`[Server] ativo na porta: ${config.client.port}`);
 })
