@@ -1,3 +1,4 @@
+const { config } = require('../utils/config');
 const { manager } = require('./manager');
 const { short } = require('./timers/short');
 const { long } = require('./timers/long');
@@ -6,12 +7,11 @@ const { grifo } = require('./players/grifo');
 const { valkyrie } = require('./players/valkyrie');
 const { silent } = require('./players/silent');
 
-exports.bots = {
-    manager: manager,
-    short: short,
-    long: long,
-    kraken: kraken,
-    grifo: grifo,
-    valkyrie: valkyrie,
-    silent: silent,
-}
+manager.login(config.manager).then(() => {
+    short.login(config.shortTimer);
+    long.login(config.longTimer);
+    kraken.login(config.kraken);
+    grifo.login(config.grifo);
+    valkyrie.login(config.valkyrie);
+    silent.login(config.silent);
+});
