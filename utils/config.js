@@ -7,6 +7,11 @@ try {
 
 exports.config = {
     mongodb: config ? config.mongodb : process.env.MONGO_DB,
+    client: {
+        id: config ? config.client.id : process.env.CLIENT_ID,
+        secret: config ? config.client.secret : process.env.CLIENT_SECRET,
+        port: config ? config.client.port : process.env.PORT
+    },
     manager: config ? config.bots.manager : process.env.MANAGER_TOKEN,
     silent: config ? config.bots.silent : process.env.SILENT_TOKEN,
     longTimer: config ? config.bots.long : process.env.LONG_TOKEN,
