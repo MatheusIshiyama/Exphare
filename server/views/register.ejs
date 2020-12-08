@@ -1,0 +1,41 @@
+<%- include('partials/header') -%>
+<div class="container">
+    <div class="card register-card text-center border border-primary" style="background-color: #12111c;">
+        <img src="/assets/exphareCard.jpg" class="card-img" alt="Exphare - Aprenda mais!" />
+        <br>
+        <h5 class="card-title text-white">Exphare - Aprenda mais!</h5>
+        <div class="card-body">
+            <div class="input-group">
+                <span class="input-group-text">Id</span>
+                <input type="text" disabled value="<%= id %>" class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Nome</span>
+                <input type="text" disabled value="<%= name %>" class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Usuário</span>
+                <input type="text" placeholder="username" class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Senha</span>
+                <input type="password" placeholder="password" class="form-control"></input>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Repetir senha</span>
+                <input type="password" placeholder="password" class="form-control"></input>
+            </div>
+            <br>
+            <form action="/auth">
+                <button class="btn btn-primary" type="submit" >
+                    Registrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer') -%>
