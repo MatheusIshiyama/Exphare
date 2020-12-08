@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const userModel = require('../../models/user');
 
 function isAuthorizated(req, res, next) {
     if (req.user) {
@@ -10,8 +9,10 @@ function isAuthorizated(req, res, next) {
 }
 
 router.get('/', isAuthorizated, async (req, res) => {
-    const user = await userModel.findOne({ id: req.user.id });
-    res.send(user);
+    res.render('register', { 
+        id: req.user.id,
+        name: req.user.name
+    });
 })
 
 module.exports = router;
