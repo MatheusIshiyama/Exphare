@@ -3,7 +3,6 @@ const session = require('express-session');
 const passport = require('passport');
 const { config } = require('../utils/config');
 require('./strategies/discordStrategy');
-
 const app = express();
 
 // * Routes
@@ -26,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // * Middlewares Routes
-app.get('/auth', authRoute);
+app.use('/auth', authRoute);
 
 app.listen(config.client.port, () => {
     console.log(`[Server] ativo na porta: ${config.client.port}`);
