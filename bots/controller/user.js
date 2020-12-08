@@ -12,7 +12,7 @@ async function userVerify(userId, name) {
             password: null,
             lastConnection: Date.now(),
             accumulatedTime: 0,
-            toDo: Array
+            tasks: Array
         });
         await newUser.save();
     }
