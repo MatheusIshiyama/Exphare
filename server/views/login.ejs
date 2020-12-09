@@ -5,22 +5,25 @@
         <br>
         <h5 class="card-title text-white">Exphare - Aprenda mais!</h5>
         <div class="card-body">
+            <form method="POST" action="/redirect">
             <div class="input-group">
                 <span class="input-group-text">Usuário</span>
-                <input type="text" placeholder="username" class="form-control">
+                <input type="text" required placeholder="username" class="form-control" id="username" name="username">
+                <span class="input-group-text">#</span>
+                <input type="number" required placeholder="0000" class="form-control" id="tag" name="tag">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-text">Senha</span>
-                <input type="password" placeholder="password" class="form-control"></input>
+                <input type="password" required placeholder="password" class="form-control" id="password" name="password">
             </div>
             <br>
-            <form action="/auth">
-                <button class="btn btn-primary" type="submit" >
+                <button class="btn btn-primary" type="submit">
                     Entrar
                 </button>
             </form>
         </div>
     </div>
 </div>
+<script src="/scripts/login.js"></script>
 <%- include('partials/footer') -%>
