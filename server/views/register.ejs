@@ -5,7 +5,7 @@
         <br>
         <h5 class="card-title text-white">Exphare - Aprenda mais!</h5>
         <div class="card-body">
-            <form method="POST" action="/register">
+            <form method="POST" action="/register/redirect">
             <div class="input-group">
                 <span class="input-group-text">Id</span>
                 <input type="text" disabled value="<%= id %>" class="form-control" id="id">
@@ -20,7 +20,7 @@
             <br>
             <div class="input-group">
                 <span class="input-group-text">Senha</span>
-                <input type="password" required placeholder="password" class="form-control" id="password"></input>
+                <input type="password" required placeholder="password" class="form-control" id="password" name="password"></input>
             </div>
             <br>
             <div class="input-group">
