@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { config } = require("../utils/config");
+const { config } = require("../config");
 
 mongoose
     .connect(config.mongodb, {
