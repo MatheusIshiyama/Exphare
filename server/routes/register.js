@@ -11,7 +11,8 @@ function isAuthorizated(req, res, next) {
 router.get('/', isAuthorizated, async (req, res) => {
     res.render('register', { 
         id: req.user.id,
-        name: req.user.name
+        username: req.user.name,
+        tag: req.user.tag
     });
 })
 
