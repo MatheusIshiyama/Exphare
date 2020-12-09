@@ -25,7 +25,7 @@ passport.use(new DiscordStrategy({
         const newUser = new userModel({
             id: profile.id,
             username: profile.username,
-            discriminator: profile.discriminator,
+            tag: profile.discriminator,
             lastConnection: 0,
             accumulatedTime: 0,
             toDo: Array
