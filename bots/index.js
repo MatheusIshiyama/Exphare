@@ -1,4 +1,4 @@
-const { config } = require('../config');
+const { config } = require('../configs');
 const { manager } = require('./manager');
 const { short } = require('./timers/short');
 const { long } = require('./timers/long');
