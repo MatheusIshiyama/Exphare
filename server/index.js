@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
-const { config } = require('../utils/config');
+const { config } = require('../config');
 require('./strategies/discordStrategy');
 const app = express();
 
