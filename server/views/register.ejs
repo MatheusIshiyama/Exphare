@@ -5,37 +5,38 @@
         <br>
         <h5 class="card-title text-white">Exphare - Aprenda mais!</h5>
         <div class="card-body">
+            <form>
             <div class="input-group">
                 <span class="input-group-text">Id</span>
-                <input type="text" disabled value="<%= id %>" class="form-control">
+                <input type="text" disabled value="<%= id %>" class="form-control" id="id">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-text">Nome</span>
-                <input type="text" disabled value="<%= name %>" class="form-control">
+                <input type="text" disabled value="<%= name %>" class="form-control" id="name">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-text">Usuário</span>
-                <input type="text" placeholder="username" class="form-control">
+                <input type="text" required placeholder="username" class="form-control" id="username">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-text">Senha</span>
-                <input type="password" placeholder="password" class="form-control"></input>
+                <input type="password" required placeholder="password" class="form-control" id="password"></input>
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-text">Repetir senha</span>
-                <input type="password" placeholder="password" class="form-control"></input>
+                <input type="password" required placeholder="password" class="form-control" id="check_password"></input>
             </div>
             <br>
-            <form action="/auth">
-                <button class="btn btn-primary" type="submit" >
+                <button class="btn btn-primary" type="submit">
                     Registrar
                 </button>
             </form>
         </div>
     </div>
 </div>
+<script src="/scripts/register.js"></script>
 <%- include('partials/footer') -%>
