@@ -74,9 +74,12 @@ bot.on("voiceStateUpdate", async (oldState, newState) => {
 });
 
 bot.on("message", async message => {
-    if (message.author.bot) return;
     const id = message.channel.id;
-    if(id === '783434206697095198') {
+    if (message.author.bot) return;
+    if (message.channel.type === 'dm') { 
+        if (message.content != 'profile') return;
+        
+    } else if(id === '783434206697095198') {
         showTasks(message);
     } else if (id === '783395377557929984') {
         newTask(message);
