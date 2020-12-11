@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const { welcome } = require('./include/welcome');
 const { role } = require('./include/channel');
-const { userConnection, showTasks, newTask, removeTask } = require('./controller/user');
+const { userConnection, showTasks, newTask, removeTask, getProfile } = require('./controller/user');
 const { help } = require('./include/help');
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
@@ -77,7 +77,13 @@ bot.on("message", async message => {
     const id = message.channel.id;
     if (message.author.bot) return;
     if (message.channel.type === 'dm') { 
-        if (message.content != 'profile') return;
+        if (message.content === 'profile') {
+            getProfile(message);    
+        } else if (message.content === 'username') {
+            
+        } else {
+            return;
+        }
         
     } else if(id === '783434206697095198') {
         showTasks(message);
