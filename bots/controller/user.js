@@ -1,5 +1,6 @@
 const userModel = require('../../models/user');
 const { MessageEmbed } = require('discord.js');
+const msgEmbed = require('../include/message');
 
 async function userVerify(userId, name) {
     const req = await userModel.findOne({ id: userId });
@@ -151,21 +152,25 @@ module.exports = {
     async getProfile(message) {
         const user = await userModel.findOne({ id: message.author.id });
 
-        const msg = new MessageEmbed()
-            .setTitle(message.author.username)
-            .setColor("3498DB")
-            .setTimestamp(Date.now())
-            .setFooter("Exphare - Aprenda mais!", message.client.user.avatarURL());
+        msgEmbed.setTitle(message.author.username);
 
         if (user.username) {
-            msg.setDescription(`O usuário é: ${user.username}`);
+            msgEmbed.setDescription(`O usuário é: ${user.username}`);
         } else {
-            msg.setDescription('O usuário ainda não foi definido, para adicionar um usuário, utilize o comando "!username"');
-        }
+            msgEmbed.setDescription('O usuário ainda não foi definido, para adicionar um usuário, utilize o comando "!username"');
+        };
+
+        message.channel.send(msgEmbed);
     },
     async username(message) {
         const user = await userModel.findOne({ id: message.author.id });
 
-        
+        msgEmbed.setTitle(`Usuário de ${message.author.username}`);
+
+        if (user.username) {
+            msgEmbed.setDescription(`O usuário é: ${user.username}`);
+        } else {
+            msgEmbed.setDescription('O usuário ainda não foi definido, deseja criar um usuário? Digite \`"sim"\` ou \`"nao"\`');
+        };
     }
 }
