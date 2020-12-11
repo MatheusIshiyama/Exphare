@@ -147,5 +147,25 @@ module.exports = {
                 log.send(`${message.author}, afazer: \`${message.content}\` não está na lista de afazeres.`);
             }
         }
+    },
+    async getProfile(message) {
+        const user = await userModel.findOne({ id: message.author.id });
+
+        const msg = new MessageEmbed()
+            .setTitle(message.author.username)
+            .setColor("3498DB")
+            .setTimestamp(Date.now())
+            .setFooter("Exphare - Aprenda mais!", message.client.user.avatarURL());
+
+        if (user.username) {
+            msg.setDescription(`O usuário é: ${user.username}`);
+        } else {
+            msg.setDescription('O usuário ainda não foi definido, para adicionar um usuário, utilize o comando "!username"');
+        }
+    },
+    async username(message) {
+        const user = await userModel.findOne({ id: message.author.id });
+
+        
     }
 }
