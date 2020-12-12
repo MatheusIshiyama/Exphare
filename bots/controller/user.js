@@ -192,10 +192,10 @@ module.exports = {
 
         message.channel.send(msgEmbed);
     },
-    async setUsername(message, args) {
+    async setUsername(message, Username) {
         const user = await userModel.findOne({ id: message.author.id });
-        const username = args.toLowerCase();
-        const usernameVerify = await userModel.findOne({ username: args });
+        const username = Username.toLowerCase();
+        const usernameVerify = await userModel.findOne({ username: username });
 
         msgEmbed.setTitle(`Usuário de ${message.author.username}`);
 
@@ -214,10 +214,10 @@ module.exports = {
         }
 
         if (user.username) {
-            msgEmbed.setDescription(`O seu usuário atual é: \`${user.username}\` e será alterado para \`${args}\`\n
+            msgEmbed.setDescription(`O seu usuário atual é: \`${user.username}\` e será alterado para \`${username}\`\n
             **Deseja continuar?** (Digite: \`sim\` / \`nao\`)`);
         } else {
-            msgEmbed.setDescription(`O usuário será alterado para \`${args}\``);
+            msgEmbed.setDescription(`O usuário será alterado para \`${username}\``);
         }
 
         const msg = await message.channel.send(msgEmbed);
