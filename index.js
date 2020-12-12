@@ -1,3 +1,3 @@
 require('./database');
 require('./bots');
-require('./server');
+//require('./server');
